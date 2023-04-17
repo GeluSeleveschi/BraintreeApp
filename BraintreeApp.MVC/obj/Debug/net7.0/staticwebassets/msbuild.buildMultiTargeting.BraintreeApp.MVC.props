@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\BraintreeApp.MVC.props" />
+</Project>
