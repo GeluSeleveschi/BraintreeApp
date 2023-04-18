@@ -31,10 +31,16 @@ namespace BraintreeApp.MVC.Controllers
 
         public IActionResult Index()
         {
-            var gateway = _braintreeService.GetGateway();
-            var clientToken = gateway.ClientToken.Generate();
-
-            ViewBag.ClientToken = clientToken;
+            try
+            {
+                var gateway = _braintreeService.GetGateway();
+                var clientToken = gateway.ClientToken.Generate();
+                ViewBag.ClientToken = clientToken;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Invalid credentials.", ex);
+            }
 
             var model = new BookPurchaseVM() { Thumbnail = "/Images/credit-card.jpg" };
 
